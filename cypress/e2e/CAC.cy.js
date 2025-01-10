@@ -1,7 +1,9 @@
 describe('Central de Atendimento ao Cliente', () => {
-  it('verificar o titulo da aplicacao', () => {
+  beforeEach(() => {
     cy.visit('./src/index.html')
-
+  })
+  
+  it('verificar o titulo da aplicacao', () => {
     cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
   })
 })
