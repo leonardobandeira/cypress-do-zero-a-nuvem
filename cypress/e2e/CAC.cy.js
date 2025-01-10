@@ -8,10 +8,15 @@ describe('Central de Atendimento ao Cliente', () => {
   })
 
   it('preencher os campos obrigatórios e envia o formulário', () =>{
+    // Texto longo com biblioteca _
+    const longTexto = Cypress._.repeat('abcdef', 100)
+    
     cy.get('#firstName').type('Pedro')
     cy.get('#lastName').type('Lima')
     cy.get('#email').type('teste@mail.com')
-    cy.get('#open-text-area').type('Obrigado!')
+    cy.get('#open-text-area').type(longTexto, {
+      delay: 0
+    })
 
     cy.get('button[type="submit"]').click()
 
