@@ -2,15 +2,15 @@ describe('Central de Atendimento ao Cliente', () => {
   beforeEach(() => {
     cy.visit('./src/index.html')
   })
-  
+
   it('verificar o titulo da aplicacao', () => {
     cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
   })
 
-  it('preencher os campos obrigatórios e envia o formulário', () =>{
+  it('preencher os campos obrigatórios e envia o formulário', () => {
     // Texto longo com biblioteca _
     const longTexto = Cypress._.repeat('abcdef', 100)
-    
+
     cy.get('#firstName').type('Pedro')
     cy.get('#lastName').type('Lima')
     cy.get('#email').type('teste@mail.com')
@@ -40,7 +40,7 @@ describe('Central de Atendimento ao Cliente', () => {
       .should('have.value', '')
   })
 
-  it.only('exibe mensagem quando o telefone é obrigatorio mas é vazio', () => {
+  it('exibe mensagem quando o telefone é obrigatorio mas é vazio', () => {
     cy.get('#firstName').type('Pedro')
     cy.get('#lastName').type('Pedro P')
     cy.get('#email').type('pedropedro@p.com')
@@ -50,5 +50,31 @@ describe('Central de Atendimento ao Cliente', () => {
     cy.get('button[type="submit"]').click()
 
     cy.get('.error').should('be.visible')
+  })
+
+  it.only('verifica campos limpos', () => {
+    cy.get('#firstName')
+      .type('Pedro')
+      .should('have.value', 'Pedro')
+      .clear()
+      .should('have.value', '')
+
+    cy.get('#lastName')
+      .type('Pedro P')
+      .should('have.value', 'Pedro P')
+      .clear()
+      .should('have.value', '')
+
+    cy.get('#email')
+      .type('pedropedro@pedro.p')
+      .should('have.value', 'pedropedro@pedro.p')
+      .clear()
+      .should('have.value', '')
+
+    cy.get('#phone')
+      .type('123456789')
+      .should('have.value', '123456789')
+      .clear()
+      .should('have.value', '')
   })
 })
