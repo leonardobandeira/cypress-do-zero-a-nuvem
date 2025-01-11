@@ -22,4 +22,15 @@ describe('Central de Atendimento ao Cliente', () => {
 
     cy.get('.success').should('be.visible')
   })
+
+  it.only('exibe mensagem de erro ao usar email inválido', () => {
+    cy.get('#firstName').type('Pedro')
+    cy.get('#lastName').type('Teste')
+    cy.get('#email').type('teste.gmail.com')
+    cy.get('#open-text-area').type('Teste para email inválido!')
+
+    cy.get('button[type="submit"]').click()
+
+    cy.get('.error').should('be.visible')
+  })
 })
