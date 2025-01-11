@@ -34,9 +34,21 @@ describe('Central de Atendimento ao Cliente', () => {
     cy.get('.error').should('be.visible')
   })
 
-  it.only('Campo telefone continua vazio quando preenchido com valor errado', () => {
+  it('Campo telefone continua vazio quando preenchido com valor errado', () => {
     cy.get('#phone')
       .type('abcde')
       .should('have.value', '')
+  })
+
+  it.only('exibe mensagem quando o telefone é obrigatorio mas é vazio', () => {
+    cy.get('#firstName').type('Pedro')
+    cy.get('#lastName').type('Pedro P')
+    cy.get('#email').type('pedropedro@p.com')
+    cy.get('#open-text-area').type('Teste')
+    cy.get('#phone-checkbox').click()
+
+    cy.get('button[type="submit"]').click()
+
+    cy.get('.error').should('be.visible')
   })
 })
