@@ -23,7 +23,7 @@ describe('Central de Atendimento ao Cliente', () => {
     cy.get('.success').should('be.visible')
   })
 
-  it.only('exibe mensagem de erro ao usar email inválido', () => {
+  it('exibe mensagem de erro ao usar email inválido', () => {
     cy.get('#firstName').type('Pedro')
     cy.get('#lastName').type('Teste')
     cy.get('#email').type('teste.gmail.com')
@@ -32,5 +32,11 @@ describe('Central de Atendimento ao Cliente', () => {
     cy.get('button[type="submit"]').click()
 
     cy.get('.error').should('be.visible')
+  })
+
+  it.only('Campo telefone continua vazio quando preenchido com valor errado', () => {
+    cy.get('#phone')
+      .type('abcde')
+      .should('have.value', '')
   })
 })
