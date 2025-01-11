@@ -77,4 +77,10 @@ describe('Central de Atendimento ao Cliente', () => {
       .clear()
       .should('have.value', '')
   })
+
+  it.only('enviando sem dados obrigatorios', () => {
+    cy.get('button[type="submit"]').click()
+
+    cy.get('.error').should('be.visible')
+  })
 })
