@@ -83,4 +83,10 @@ describe('Central de Atendimento ao Cliente', () => {
 
     cy.get('.error').should('be.visible')
   })
+
+  it.only('1 - envia formulário completo com comando customizado', () => {
+    cy.fillMandatoryFieldsAndSubmit()
+
+    cy.get('.success', { timeout: 10000 }).should('be.visible');
+  })
 })
