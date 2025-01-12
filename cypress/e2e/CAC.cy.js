@@ -84,16 +84,21 @@ describe('Central de Atendimento ao Cliente', () => {
     cy.get('.error').should('be.visible')
   })
 
-  it.only('1 - envia formulário completo com comando customizado', () => {
+  it('1 - envia formulário completo com comando customizado', () => {
     const data = {
       nome: 'Pedro Pedro',
       sobrenome: 'Pedro P',
       email: 'pedropedro@pedro.p',
       texto: 'Teste automatizado!'
     }
-    
+
     cy.fillMandatoryFieldsAndSubmit(data)
 
     cy.get('.success', { timeout: 10000 }).should('be.visible');
+  })
+
+  it.only('pegando ancoras', () => {
+    cy.fillMandatoryFieldsAndSubmit()
+    cy.contains('button', 'Enviar').click()
   })
 })
